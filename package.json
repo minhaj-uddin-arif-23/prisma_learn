@@ -2,7 +2,7 @@
   "name": "Prisma_Mastary",
   "packageManager": "yarn@4.6.0",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only ./src/aggregation.ts",
+    "dev": "ts-node-dev --respawn --transpile-only ./src/interactive.ts",
     "generate": "yarn dlx prisma generate"
   },
   "devDependencies": {
