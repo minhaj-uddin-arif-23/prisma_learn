@@ -11,7 +11,7 @@ const DeleteData = async () => {
   // console.log(DeleteResult);
   const DeleteResultMany = await prisma.post.deleteMany({
     where: {
-    author : "Arif"
+      // author : "Arif"
     },
   });
   console.log(DeleteResultMany);
