@@ -22,26 +22,23 @@ const Update = async () => {
 
   //   },
   // });
-  // 
+  //
   // console.log(result2);
   // upsert
   const Upsert = await prisma.post.upsert({
-    where:{
-      id:2 
+    where: {
+      id: 2,
     },
-    update:{
-      title:"Hello Title -1"
+    update: {
+      title: "Hello Title -1",
     },
-    create:{
-      title:"New Upsert title",
-      description:"Description 1",
-      author:"Shayek",
-      published:true,
-      userName: "Shayek Ahmadullah"
-    }
-  })
-  console.log(Upsert); 
+    create: {
+      title: "auto title 1",
+      content: "auto content 1",
+      authorId: 1,
+      published: true,
+    },
+  });
+  console.log(Upsert);
 };
 Update();
-
-

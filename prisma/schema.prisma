@@ -12,10 +12,10 @@ model Post {
   title        String
   content      String
   authorId     Int
-  author       User           @relation(fields: [authorId], references: [id])
   published    Boolean        @default(false)
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
+  author       User           @relation(fields: [authorId], references: [id])
   postCategory PostCategory[]
 
   @@map("newPostTable")
@@ -25,11 +25,11 @@ model User {
   id       Int      @id @default(autoincrement())
   username String   @unique
   email    String   @unique
+  role     UserRole @default(user)
   age      Int      @default(0)
   salary   Int      @default(20000)
-  role     UserRole @default(user)
-  profile  Profile? // one to one 
-  post     Post[] // one to many 
+  post     Post[]
+  profile  Profile?
 
   @@map("users")
 }
@@ -38,8 +38,7 @@ model Profile {
   id     Int     @id @default(autoincrement())
   bio    String?
   userId Int     @unique
-
-  user User @relation(fields: [userId], references: [id])
+  user   User    @relation(fields: [userId], references: [id])
 
   @@map("profiles")
 }
@@ -47,20 +46,18 @@ model Profile {
 model Category {
   id           Int            @id @default(autoincrement())
   name         String
-  postCategory PostCategory[] // many to many
+  postCategory PostCategory[]
 
   @@map("categorys")
 }
 
-// intermediate table
-
 model PostCategory {
   postId     Int
-  post       Post     @relation(fields: [postId], references: [id])
   categoryId Int
   category   Category @relation(fields: [categoryId], references: [id])
+  post       Post     @relation(fields: [postId], references: [id])
 
-  @@id([postId, categoryId]) // using composite key we can modyfiy this id into primary key
+  @@id([postId, categoryId])
   @@map("post_category")
 }
 
